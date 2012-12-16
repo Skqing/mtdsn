@@ -9,6 +9,10 @@ var url = require("url");
 var qs = require("querystring");
 var fs = require("fs");
 var formidable = require("formidable");
+
+var redis = require("redis");
+const redis_client = redis.createClient();
+//const test_c = redis.createClient();
 /**
  * 手机客户端通过此方法上传采集到的数据
  * 此方法是实时的，主要用于用户实时定位
@@ -21,10 +25,18 @@ exports.realTimeData = function(req, res){
   var query = url.parse(req.url).query;
   var token = qs.parse(query)['token'];
   var data = qs.parse(query)['data'];
+  redis_client.set("uid", "token", redis.print);
+//  redis_client.set("public_points", data, redis.print);
+  redis_client.publish("public_points", data);
+
+//  test_c.on("message", function (channel, message) {
+//    console.log("test_c channel " + channel + ": " + message);
+//  });
+//  test_c.subscribe("public_points");
 
   console.log("token:"+token+'#'+'data:'+data);
   res.writeHead(200, {"Content-Type": "text/html"});
-  res.write("token:"+token+'#'+'data:'+data);  //要定义返回格式
+//  res.write("token:"+token+'#'+'data:'+data);  //要定义返回格式
   res.end();
 }
 
