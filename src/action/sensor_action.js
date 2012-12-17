@@ -24,10 +24,13 @@ const redis_client = redis.createClient();
 exports.realTimeData = function(req, res){
   var query = url.parse(req.url).query;
   var token = qs.parse(query)['token'];
-  var data = qs.parse(query)['data'];
+  var point = qs.parse(query)['data'];
+
   redis_client.set("uid", "token", redis.print);
 //  redis_client.set("public_points", data, redis.print);
-  redis_client.publish("public_points", data);
+  var data = {"id":token, "point":point};
+  var datastr = JSON.stringify(data);
+  redis_client.publish("public_points", datastr, redis.print);
 
 //  test_c.on("message", function (channel, message) {
 //    console.log("test_c channel " + channel + ": " + message);
