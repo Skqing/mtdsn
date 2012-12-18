@@ -14,8 +14,11 @@ mongoose.connect(global.mongoconfig.url, function(err){
 });
 //global.dbconfig.url
 // models
+require('./user');
+require('./loginrecord');
 require('./sensor');
 
-
+exports.User = mongoose.model('User');
+exports.LoginRecord = mongoose.model('LoginRecord');
 exports.Sensor = mongoose.model('Sensor');
 

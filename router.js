@@ -8,7 +8,7 @@ var url = require("url");
 var sensor = require('./src/action/sensor_action');
 
 var handle = {};
-handle["/rtdata"] = sensor.realTimeData;
+handle["/rtdata"] = sensor.freeway;
 handle["/updata"] = sensor.uploadData;
 handle["/dwdata"] = sensor.downLoadData;
 
