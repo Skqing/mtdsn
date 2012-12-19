@@ -6,14 +6,16 @@
  */
 
 var http = require("http");
-
 var router = require("./router");
 
 global.appconfig = require('./config/app_config').appconfig;
 global.mongoconfig = require('./config/app_config').mongoconfig;
 
+//exports.app = http.createServer(function (req, res) {
+//  router.route( req, res );
+//}).listen(8099, '192.168.1.104');
 exports.app = http.createServer(function (req, res) {
   router.route( req, res );
-}).listen(8099, '127.0.0.1');
-
-console.log('Server running at http://127.0.0.1:8099/');
+}).listen(8099, function(){
+    console.log("Express server listening on port 8099");
+});
