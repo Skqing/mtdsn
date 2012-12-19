@@ -13,7 +13,7 @@ var formidable = require("formidable");
 var check = require('validator').check,
   sanitize = require('validator').sanitize;
 
-var models = require("models");
+var models = require("../models");
 var User = models.User;
 var Loginrecord = models.LoginRecord;
 
@@ -49,9 +49,11 @@ exports.freeway = function(req, res){
     //如果用户在移动客户端的session中不存在，则返回提示：用户未登录
     if(reply === null){  // reply is null when the key is missing
       res.writeHead(200, {"Content-Type": "text/plan"});
+      console.log('---nosession---');
       res.write('nosession');  //要定义返回格式
       res.end();
-    } 
+      return;
+    }
     //保存用户数据到密集型collection中
 
 

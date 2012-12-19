@@ -6,10 +6,11 @@
  */
 
 var http = require("http");
-var router = require("./router");
 
 global.appconfig = require('./config/app_config').appconfig;
 global.mongoconfig = require('./config/app_config').mongoconfig;
+
+var router = require("./router");
 
 //exports.app = http.createServer(function (req, res) {
 //  router.route( req, res );
